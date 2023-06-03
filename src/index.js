@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import "./login.css"
+import StudentPageUI from "./studentpage";
 
 // const jwtToken = document.cookie
 //     .split("; ")
@@ -185,7 +186,7 @@ function LoginUI() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <LoginUI />
+    <StudentPageUI />
 );
 
 // If you want to start measuring performance in your app, pass a function
