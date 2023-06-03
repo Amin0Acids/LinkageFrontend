@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import "./login.css"
 import StudentPageUI from "./studentpage";
+import Teacherpage from "./teacherpage";
+import TeacherPageUI from "./teacherpage";
+import SlideViewer from "./slideAPI";
 
 // const jwtToken = document.cookie
 //     .split("; ")
