@@ -15,6 +15,7 @@ function StudentPageUI() {
             <title>GOOGLE SLIDES TITLE HERE</title>
             <div className={"headerContainer"}>
                 <div className={"containerLeft"}>
+                    <button id={"usernamestudent"}>{"Hello, Guest"}</button>
                     <div className={"logo"}>
                         <img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />
                         <h1>Linkage</h1>
@@ -25,10 +26,9 @@ function StudentPageUI() {
                         <input id={"searchbar"} className={"input"} type={"text"} name={"searchbar"} placeholder={"Session ID"} value={sessionID} onChange={changeSessionID} />
                     </div>
                     <div className={"tab"}>
-                        <button className={"tablinks"} value={"button1"}>{'Button1'}</button>
-                        <button className={"tablinks"} value={"button2"}>{'Button2'}</button>
+                        <button className={"tablinks"} value={"button1"}>{'Log Out'}</button>
+                        <button className={"tablinks"} value={"button2"}>{'Join Session '}</button>
                     </div>
-                    <button id={"username"}>{"Hello, Guest"}</button>
                 </div>
             </div>
             <div className={"container"}>
@@ -40,9 +40,7 @@ function StudentPageUI() {
                 <div className={"containerRight"}>
                     <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
                 </div>
-
-                <button>{"console link"}</button>
-                <button id="sendQuestion" className="questionButton" onClick="sendQuestion()" style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Note"}</button>
+                <button id="sendQuestion" className="noteButton" onClick="sendQuestion()" style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Note"}</button>
             </div>
         </div>
     );

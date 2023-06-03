@@ -155,12 +155,13 @@ login page
     font-family: "Qanelas Soft Regular", serif;
 }
 .noteButton{
+    margin-left: 1%;
     background-color: #0B5456;
     padding: 1% 3%;
     font-size: 125%;
     display: inline;
     color:white;
-    margin-top: 1%;
+    margin-top: 0%;
     font-family: 'Qanelas Soft SemiBold', serif;
     border: 1px solid black;
 }
@@ -417,22 +418,23 @@ html, body {
     font-size: 100%;
     color: black;
 }
-/*#username {*/
-/*    font-family: 'Qanelas Soft Semibold', serif;*/
-/*    cursor: pointer;*/
-/*    position: absolute;*/
-/*    right: 0%;*/
-/*    top: 100%;*/
-/*    translate: 0 -100%;*/
-/*    margin: auto auto;*/
-/*    text-align: right;*/
-/*    display: block;*/
-/*    border: none;*/
-/*    background-color: white;*/
-/*    font-size: 200%;*/
-/*    padding: 0 10px;*/
-/*    text-decoration: underline;*/
-/*}*/
+#usernamestudent {
+    float: left;
+    font-family: 'Qanelas Soft Semibold', serif;
+    cursor: pointer;
+    position: absolute;
+    right: 0%;
+    top: 100%;
+    translate: 0 -100%;
+    margin: auto auto;
+    text-align: right;
+    display: block;
+    border: none;
+    background-color: white;
+    font-size: 200%;
+    padding: 0 10px;
+    text-decoration: underline;
+}
 
 #v1 {
     border-left: 6px solid lime;
@@ -464,9 +466,13 @@ html, body {
 }
 
 #searchbar{
-    width: 40%;
-    font-size: 90%;
-    min-width: 70%;
+    margin-top: 20px;
+    margin-left: 10px;
+    height: 80px;
+    float: left;
+    width: 50%;
+    font-size: 40px;
+    min-width: 40%;
     padding: 12px 24px;
     box-sizing: border-box;
     border: 2px solid #ccc;
