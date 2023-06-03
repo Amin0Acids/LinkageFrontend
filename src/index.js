@@ -1,13 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import "./login.css"
 
-const jwtToken = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("jwt="))
-    .split("=")[1];
-
+// const jwtToken = document.cookie
+//     .split("; ")
+//     .find((row) => row.startsWith("jwt="))
+//     .split("=")[1];
+let registerMode = false;
 function LoginUI() {
     const jwtTokenRef = useRef(null);
 
@@ -47,7 +47,7 @@ function LoginUI() {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.isSuccessful);
+                data.isSuccessful = true;
             })
             .catch((error) => console.log(error));
 
@@ -75,68 +75,21 @@ function LoginUI() {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    //fix this later
+                    data.jwtToken = null;
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
                     resolve(true);
                 })
                 .catch((error) => {
-                    
+
                     console.log(error);
                     reject(error);
                 });
         });
     }
-
-    function fetchUserLogout() {
-        fetch("http://10.0.0.74:8080/user/logout", {
-            method: "GET",
-            headers: {
-                authorization: `Bearer ${jwtToken}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.isSuccessful = true;
-            })
-            .catch((error) => console.log(error));
-    }
-
-    function fetchChangePassword() {
-        fetch("http://10.0.0.74:8080/user/password", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${jwtToken}`,
-            },
-            body: JSON.stringify({
-                password: "", // ask leo
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.isSuccessful = true;
-            })
-            .catch((error) => console.log(error));
-    }
-
-    function fetchActivateAccount() {
-        fetch("http://10.0.0.74:8080/user/activate", {
-            method: "GET",
-            headers: {
-                authorization: `Bearer ${jwtToken}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.isSuccessful = true;
-            })
-            .catch((error) => console.log(error));
-    }
-
-
-    let registerMode = false;
-    const switchMode = (event) => {
+      const switchMode = (event) => {
         //onclick
         if(!registerMode) {
             const confirmPassword = document.createElement("input");
@@ -163,29 +116,35 @@ function LoginUI() {
 
     const validateLoginForm = (event) =>{
         let confirmPassword = document.getElementById("confirmPassword");
-
-        event.preventDefault()
-
-        if(registerMode && password.value.length < 8 && registerMode){
+        console.log(errorMessage)
+        console.log(registerMode)
+        if(registerMode && password.length < 8 && registerMode){
             setErrorMessage("Password must be at least 8 characters");
+            console.log(errorMessage)
 
             return;
         }
-
-        if(registerMode && password.value !== confirmPassword.value){
+        else if(registerMode && password !== confirmPassword.value){
             setErrorMessage("Passwords do not match");
+            console.log(errorMessage)
 
             return;
         }
-        if(registerMode) {
-            setErrorMessage('');
+        else{
+            if(registerMode) {
+                setErrorMessage('');
 
-            UserAPI.fetchUserSignup(username, password, role);
-        } else {
-            setErrorMessage('');
+                fetchUserSignup(username, password, role);
+            } else {
+                console.log("logging in")
+                setErrorMessage('');
 
-            // fetchUserLogin(username, password)
+                fetchUserLogin(username, password)
+                    .then(() => {console.log(jwtTokenRef.current); console.log("fish"); window.location.href = "./main"})
+                    .catch(() => {console.log(jwtTokenRef.current); alert("Your email or password may be incorrect.")});
+            }
         }
+
     }
 
     function logvalues(){
@@ -193,9 +152,15 @@ function LoginUI() {
         console.log(password);
         console.log(role);
     }
+//conditional rendering
 
-    //fetches
+    const [page, setPage] = useState('home');
 
+    // const renderPage = () => {
+    //     if(page === 'home'){
+    //         return <LoginUI />;
+    //     }
+    // }
 
     return (
         <div id="container">
@@ -217,7 +182,6 @@ function LoginUI() {
         </div>
     );
 }
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
