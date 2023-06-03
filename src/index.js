@@ -7,7 +7,7 @@ function loginUI() {
         <body>
         <div id="container">
             <div id="logo">
-                <h1 style={{fontFamily: "Qanelas Soft SemiBold", fontSize: 400%}}>jun 3</h1>
+                <h1 style={{fontFamily: "Qanelas Soft SemiBold", fontSize: "400%"}}>jun 3</h1>
             </div>
             <input id="email" className="input" type="text" name="email" placeholder="E-mail">
                 <input id="password" className="input" type="password" name="password" placeholder="Password">
