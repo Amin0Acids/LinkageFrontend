@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Qanelas Soft SemiBold';
-    src: url('../fonts/QanelasSoftSemiBold.otf');
+    src: url('../public/fonts/QanelasSoftSemiBold.otf');
 }
 
 @font-face {
     font-family: 'Qanelas Soft Regular';
-    src: url('../fonts/QanelasSoftRegular.otf');
+    src: url('../public/fonts/QanelasSoftRegular.otf');
 }
 
 #returnToMain{
