@@ -212,16 +212,16 @@ h2{
     align-items: center;
     margin-left: 1%;
 }
-.input{
-    width: 70%;
-    font-size: 90%;
-    min-width: 70%;
-    padding: 12px 24px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    transition: 0.2s;
-    border-radius: 10px;
-}
+/*.input{*/
+/*    width: 70%;*/
+/*    font-size: 90%;*/
+/*    min-width: 70%;*/
+/*    padding: 12px 24px;*/
+/*    box-sizing: border-box;*/
+/*    border: 2px solid #ccc;*/
+/*    transition: 0.2s;*/
+/*    border-radius: 10px;*/
+/*}*/
 .input:hover{
     border: 2px solid #888;
 
@@ -417,22 +417,22 @@ html, body {
     font-size: 100%;
     color: black;
 }
-#username {
-    font-family: 'Qanelas Soft Semibold', serif;
-    cursor: pointer;
-    position: absolute;
-    right: 0%;
-    top: 100%;
-    translate: 0 -100%;
-    margin: auto auto;
-    text-align: right;
-    display: block;
-    border: none;
-    background-color: white;
-    font-size: 200%;
-    padding: 0 10px;
-    text-decoration: underline;
-}
+/*#username {*/
+/*    font-family: 'Qanelas Soft Semibold', serif;*/
+/*    cursor: pointer;*/
+/*    position: absolute;*/
+/*    right: 0%;*/
+/*    top: 100%;*/
+/*    translate: 0 -100%;*/
+/*    margin: auto auto;*/
+/*    text-align: right;*/
+/*    display: block;*/
+/*    border: none;*/
+/*    background-color: white;*/
+/*    font-size: 200%;*/
+/*    padding: 0 10px;*/
+/*    text-decoration: underline;*/
+/*}*/
 
 #v1 {
     border-left: 6px solid lime;
