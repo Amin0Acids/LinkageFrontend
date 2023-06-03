@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 function LoadUI() {
     return (
         <body>
-        <div id="container"> <!-- This is the container for the logo and the form, and centers the elements -->
+        <div id="container"> {/*This is the container for the logo and the form, and centers the elements*/}
             <div id="logo">
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                     <img src='' alt="no picture"
