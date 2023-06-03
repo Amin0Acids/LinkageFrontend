@@ -5,6 +5,7 @@ import "./login.css"
 import StudentPageUI from "./studentpage";
 import Teacherpage from "./teacherpage";
 import TeacherPageUI from "./teacherpage";
+import SlideViewer from "./slideAPI";
 
 // const jwtToken = document.cookie
 //     .split("; ")
@@ -188,7 +189,7 @@ function LoginUI() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <TeacherPageUI />
+    <StudentPageUI />
 );
 
 // If you want to start measuring performance in your app, pass a function
