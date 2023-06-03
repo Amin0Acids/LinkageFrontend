@@ -25,15 +25,14 @@ function StudentPageUI() {
             <div className={"container"}>
                 {/*for player now*/}
                 <div className={"containerLeft"}>
+                    <iframe src="https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal" style={{ width: '95%', height: '500px' }} frameBorder="0" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
                 </div>
                 <div className={"containerRight"}>
-                    <div className={"btn-group"}>
-                        
-                    </div>
+                    <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
                 </div>
-                <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
 
+                <button>{"console link"}</button>
                 <button id="sendQuestion" className="questionButton" onClick="sendQuestion()" style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Note"}</button>
             </div>
         </div>
