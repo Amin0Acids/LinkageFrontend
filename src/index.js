@@ -77,10 +77,11 @@ function LoginUI() {
                 .then((data) => {
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
-                    jwtTokenRef.current = token;
+                    loginSuccess(token)
                     resolve(true);
                 })
                 .catch((error) => {
+                    
                     console.log(error);
                     reject(error);
                 });
