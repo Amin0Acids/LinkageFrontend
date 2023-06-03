@@ -1,10 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import "./login.css"
-import fetchUserSignup from "./userfetches";
+
+const jwtToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("jwt="))
+    .split("=")[1];
 
 function LoginUI() {
+    const jwtTokenRef = useRef(null);
+
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
@@ -16,11 +23,114 @@ function LoginUI() {
 
     const changePassword = (event) => {
         setPassword(event.target.value);
-
     }
 
     const changeRole = (event) => {
         setRole(event.target.value);
+    }
+
+    function loginSuccess(token) {
+        //whenever we need to access jwt token use kwtTokenRef
+        jwtTokenRef.current = token;
+    }
+    function fetchUserSignup(email, password, role) {
+        fetch("http://10.0.0.74:8080/user/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: String(email),
+                password: String(password),
+                role: String(role),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.isSuccessful);
+            })
+            .catch((error) => console.log(error));
+
+        console.log(
+            JSON.stringify({
+                email: String(email),
+                password: String(password),
+                role: String(role),
+            })
+        );
+    }
+
+    function fetchUserLogin(email, password) {
+        return new Promise((resolve, reject) => {
+            fetch("http://10.0.0.74:8080/user/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtTokenRef.current}`
+                },
+                body: JSON.stringify({
+                    email: String(email),
+                    password: String(password),
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    const token = data.jwtToken;
+                    document.cookie = `token=${token}; path=/`;
+                    jwtTokenRef.current = token;
+                    resolve(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    reject(error);
+                });
+        });
+    }
+
+    function fetchUserLogout() {
+        fetch("http://10.0.0.74:8080/user/logout", {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${jwtToken}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+            .catch((error) => console.log(error));
+    }
+
+    function fetchChangePassword() {
+        fetch("http://10.0.0.74:8080/user/password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${jwtToken}`,
+            },
+            body: JSON.stringify({
+                password: "", // ask leo
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+            .catch((error) => console.log(error));
+    }
+
+    function fetchActivateAccount() {
+        fetch("http://10.0.0.74:8080/user/activate", {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${jwtToken}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+            .catch((error) => console.log(error));
     }
 
 
@@ -69,7 +179,7 @@ function LoginUI() {
         if(registerMode) {
             setErrorMessage('');
 
-            fetchUserSignup(username, password, role);
+            UserAPI.fetchUserSignup(username, password, role);
         } else {
             setErrorMessage('');
 
@@ -82,6 +192,8 @@ function LoginUI() {
         console.log(password);
         console.log(role);
     }
+
+    //fetches
 
 
     return (
@@ -104,6 +216,7 @@ function LoginUI() {
         </div>
     );
 }
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
