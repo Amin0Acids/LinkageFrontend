@@ -35,7 +35,7 @@ function TeacherPageUI() {
         <div className={"headerContainer"}>
             <div className={"containerLeft"}>
                 <div className={"logo"}>
-                    <img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />
+                    {/*<img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />*/}
                     <h1>Linkage</h1>
                 </div>
                 <div id={styles.session}>Session ID: {sessionID}</div>

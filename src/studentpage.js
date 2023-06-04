@@ -93,7 +93,7 @@ function StudentPageUI() {
                 <div className={"containerLeft"}>
                     <p id={"usernamestudent"}>{"Hello, Guest"}</p>
                     <div className={"logo"}>
-                        <img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />
+                        {/*<img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />*/}
                         <h1>Linkage</h1>
                     </div>
                 </div>
