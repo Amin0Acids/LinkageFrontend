@@ -72,6 +72,8 @@ function LoginUI(props) {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(data.role);
+                    setRole(String(data.role));
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
@@ -140,8 +142,8 @@ function LoginUI(props) {
                 fetchUserLogin(username, password)
                     .then(() => {
                         console.log(jwtTokenRef.current);
-                        console.log("fish");
-                        if (roleVal === "teacher"){
+                        console.log(roleVal);
+                        if (roleVal === "Teacher"){
                             changePage('teacher');
                             props.page('teacher');
                         } else {
@@ -179,7 +181,7 @@ function LoginUI(props) {
                 </dataList> </> : null}
             {/*check if is error message*/}
             {errorMessage && <p>{errorMessage}</p>}
-            <button className={"button"} onClick={logvalues}>testing</button>
+            {/*<button className={"button"} onClick={logvalues}>testing</button>*/}
             <button id="login" className="button" onClick={validateLoginForm}>Login</button>
             <button id="register" className="button" onClick={switchMode}>Register</button>
         </div>
