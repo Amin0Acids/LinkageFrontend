@@ -1,14 +1,19 @@
 import React, {useRef, useState} from "react";
+import Conditionalrendering from "./index";
 
 let registerMode = false;
 function LoginUI() {
     const jwtTokenRef = useRef(null);
 
+    const [currentPage, setCurrentPage] = useState('home');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const changePage = (newPage) => {
+        setCurrentPage(newPage);
+    }
     const changeUsername = (event) => {
         setUsername(event.target.value);
     }
@@ -73,6 +78,7 @@ function LoginUI() {
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
                     resolve(true);
+                    changePage('studentpage')
                 })
                 .catch((error) => {
 
@@ -163,6 +169,7 @@ function LoginUI() {
             <button className={"button"} onClick={logvalues}>testing</button>
             <button id="login" className="button" onClick={validateLoginForm}>Login</button>
             <button id="register" className="button" onClick={switchMode}>Register</button>
+            <Conditionalrendering page={currentPage} />
         </div>
     );
 }
