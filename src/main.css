@@ -421,7 +421,6 @@ html, body {
 #usernamestudent {
     float: left;
     font-family: 'Qanelas Soft Semibold', serif;
-    cursor: pointer;
     position: absolute;
     right: 0%;
     top: 100%;
