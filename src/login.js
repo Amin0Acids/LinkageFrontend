@@ -144,6 +144,7 @@ function LoginUI(props) {
                 setErrorMessage('');
 
                 fetchUserSignup(username, password, roleVal);
+                switchMode();
             } else {
                 console.log("logging in")
                 setErrorMessage('');
