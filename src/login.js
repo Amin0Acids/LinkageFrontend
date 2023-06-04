@@ -141,7 +141,7 @@ function LoginUI(props) {
                     .then(() => {
                         console.log(jwtTokenRef.current);
                         console.log("fish");
-                        if (roleVal === "teacher"){
+                        if (roleVal === "Teacher"){
                             changePage('teacher');
                             props.page('teacher');
                         } else {
