@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import "./main.css"
-import "./teacherpage.module.css"
+import styles from "./teacherpage.module.css"
 
 function TeacherPageUI() {
 
     const questionIDs = [];
     const [sessionID, setSessionID] = useState('');
+    const [slideLink, setSlideLink] = useState('');
 
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
@@ -25,6 +26,10 @@ function TeacherPageUI() {
             })
     }
 
+    function changeSlideLink(event) {
+        setSlideLink(event.target.value);
+    }
+
     return <div>
         <title>GOOGLE SLIDES TITLE HERE</title>
         <div className={"headerContainer"}>
@@ -33,11 +38,12 @@ function TeacherPageUI() {
                     <img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />
                     <h1>Linkage</h1>
                 </div>
+                <div id={styles.session}>Session ID: {sessionID}</div>
                 <p id={"usernamestudent"}>{"Hello, Guest"}</p>
             </div>
             <div className={"containerRight"}>
                 <div className={"searchbar"}>
-                    <input id={"searchbar"} className={"input"} type={"text"} name={"searchbar"} placeholder={"Session ID"} value={sessionID} onChange={changeSessionID} />
+                    <textarea id={styles.searchbar} className={"input"} type={"text"} name={"searchbar"} placeholder={"Slide URL"} value={slideLink} onChange={changeSlideLink} />
                 </div>
                 <div className={"tab"}>
                     <button className={"tablinks"} value={"button1"}>Log Out</button>
