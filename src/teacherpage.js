@@ -4,10 +4,25 @@ import "./teacherpage.module.css"
 
 function TeacherPageUI() {
 
+    const questionIDs = [];
     const [sessionID, setSessionID] = useState('');
 
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
+    }
+
+    function getQuestionInfo() {
+        fetch("http://", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const item = {id: data.id, slideNum: data.slideNum, question: data.question};
+                questionIDs.push(item);
+            })
     }
 
     return <div>
