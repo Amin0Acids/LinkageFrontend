@@ -6,7 +6,7 @@ import ManageStudents from "./manageStudents";
 
 function TeacherPageUI(props) {
 
-    const questionIDs = [];
+    let questionIDs = [];
     const [sessionID, setSessionID] = useState('');
     const [slideLink, setSlideLink] = useState('');
     // const doRender = useRef(false);
@@ -19,7 +19,7 @@ function TeacherPageUI(props) {
     }
 
     function fetchCreateSession() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ function TeacherPageUI(props) {
     }
 
     function removeSession() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function TeacherPageUI(props) {
     }
 
     function fetchAddStudent() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -73,7 +73,7 @@ function TeacherPageUI(props) {
     }
 
     function fetchRemoveStudent() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session/remove", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function TeacherPageUI(props) {
     }
 
     function fetchRemoveQuestion() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session/question/remove", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function TeacherPageUI(props) {
     }
 
     function getQuestionInfo() {
-        fetch("http://", {
+        fetch("http://10.0.0.74:8080/teacher/session/question", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -124,8 +124,12 @@ function TeacherPageUI(props) {
         })
             .then((response) => response.json())
             .then((data) => {
-                const item = {id: data.id, slideNum: data.slideNum, question: data.question};
-                questionIDs.push(item);
+                let temp = [];
+                data.map((data) => {
+                    const item = {id: data.id, slideNum: data.slideNum, question: data.question};
+                    temp.push(item);
+                });
+                questionIDs = temp;
             })
     }
 
