@@ -69,7 +69,7 @@ function TeacherPageUI(props) {
     }
 
     function changeSlideLink(event) {
-        setSlideLink(event.target.value);
+        setSlideLink("https://docs.google.com/presentation/d/" + event.target.value.substring(39, 83) + "/embed?rm=minimal");
     }
 
     function deleteSession() {
