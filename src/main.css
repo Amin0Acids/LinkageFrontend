@@ -164,6 +164,7 @@ login page
     margin-top: 0%;
     font-family: 'Qanelas Soft SemiBold', serif;
     border: 1px solid black;
+    cursor: pointer;
 }
 .noteButton:hover{
     background-color: cadetblue;
