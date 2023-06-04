@@ -7,6 +7,7 @@ function ConditionalRendering(props) {
 
     const [page, setpage] = useState("home");
     const [jwtToken, setJwtToken] = useState("");
+    const [username, setUsername] = useState("");
 
     function getPage(page) {
         setpage(page);
@@ -16,15 +17,19 @@ function ConditionalRendering(props) {
         setJwtToken(jwtToken)
     }
 
+    function getUsername(username) {
+        setUsername(username)
+    }
+
     console.log("page: " + page);
     if (page === "home") {
-        return <LoginUI page={getPage} jwtToken={getJWTToken} />;
+        return <LoginUI page={getPage} jwtToken={getJWTToken} user={getUsername} />;
     }
     if (page === "student") {
-        return <StudentPageUI page={getPage} jwtToken={jwtToken}/>;
+        return <StudentPageUI page={getPage} user={username} jwtToken={jwtToken}/>;
     }
     if (page === "teacher") {
-        return <TeacherPageUI page={getPage} jwtToken={jwtToken}/>;
+        return <TeacherPageUI page={getPage} owner={username} jwtToken={jwtToken}/>;
     }
     return null;
 }

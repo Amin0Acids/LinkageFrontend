@@ -73,10 +73,19 @@ function LoginUI(props) {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data.role);
-                    setRole(String(data.role));
+                    setRole(data.role);
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
+                    props.user(username)
+                    props.jwtToken(token)
+                    if (data.role == "Teacher"){
+                        changePage('teacher');
+                        props.page('teacher');
+                    } else {
+                        changePage('student');
+                        props.page('student');
+                    }
                     resolve(true);
 
                 })
@@ -143,13 +152,7 @@ function LoginUI(props) {
                     .then(() => {
                         console.log(jwtTokenRef.current);
                         console.log(roleVal);
-                        if (roleVal == "Teacher"){
-                            changePage('teacher');
-                            props.page('teacher');
-                        } else {
-                            changePage('student');
-                            props.page('student');
-                        }
+                        console.log(currentPage);
                     })
                     .catch(() => {console.log(jwtTokenRef.current); alert("Your email or password may be incorrect.")});
             }

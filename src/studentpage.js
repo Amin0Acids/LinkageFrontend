@@ -5,7 +5,7 @@ import "./main.css"
 const questionIDs = [];
 function StudentPageUI(props) {
     const [sessionID, setSessionID] = useState('');
-    const [slideLink, setSlideLink] = useState('https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal');
+    const [slideLink, setSlideLink] = useState('');
     const [slideNum, setSlideNum] = useState('');
     const [question, setQuestion] = useState('');
     const jwtTokenRef = useRef('');
@@ -95,36 +95,36 @@ function StudentPageUI(props) {
     return (
         <div>
             <title>GOOGLE SLIDES TITLE HERE</title>
-            <div className={"headerContainer"}>
-                <div className={"containerLeft"}>
-                    <p id={"usernamestudent"}>{"Hello, Guest"}</p>
-                    <div className={"logo"}>
+            <div className="headerContainer">
+                <div className="containerLeft">
+                    <p id="usernamestudent">Hello, {props.user}</p>
+                    <div className="logo">
                         {/*<img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />*/}
                         <h1>Linkage</h1>
                     </div>
                 </div>
-                <div className={"containerRight"}>
-                    <div className={"searchbar"}>
-                        <input id={"searchbar"} className={"input"} type={"text"} name={"searchbar"} placeholder={"Session ID"} value={sessionID} onChange={changeSessionID} />
+                <div className="containerRight">
+                    <div className="searchbar">
+                        <input id="searchbar" className="input" type="text" name="searchbar" placeholder="Session ID" value={sessionID} onChange={changeSessionID} />
                     </div>
-                    <div className={"tab"}>
-                        <button className={"tablinks"} value={"button1"} onClick={logout}>{'Log Out'}</button>
-                        <button className={"tablinks"} value={"button2"} onClick={sendSessionID}>{'Join Session'}</button>
+                    <div className="tab">
+                        <button className="tablinks" value="button1" onClick={logout}>Log Out</button>
+                        <button className="tablinks" value="button2" onClick={sendSessionID}>Join Session</button>
                     </div>
                 </div>
             </div>
-            <div className={"container"}>
+            <div className="container">
                 {/*for player now*/}
-                <div className={"containerLeft"}>
-                    <iframe src={slideLink} style={{ width: '100%', height: '500px' }} frameBorder="0" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <div className="containerLeft">
+                    <iframe src={slideLink} style={{ width: '100%', height: '500px' }} allowFullScreen="true"></iframe>
 
                 </div>
-                <div className={"containerRight"}>
+                <div className="containerRight">
                     <textarea id="noteArea" contentEditable placeholder="Enter notes here..." value={question} onChange={changeQuestion} />
                 </div>
-                <input id={"slideNumText"} type={"text"} name={"slideNum"} placeholder={"Slide Number"} value={slideNum} onChange={changeSlideNum}/>
-                <button id="sendQuestion" className="noteButton" onClick={sendQuestion} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Question"}</button>
-                <button onClick={testValues}>{'Test Values'}</button>
+                <input id="slideNumText" type="text" name="slideNum" placeholder="Slide Number" value={slideNum} onChange={changeSlideNum}/>
+                <button id="sendQuestion" className="noteButton" onClick={sendQuestion} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>Send Question</button>
+                {/*<button onClick={testValues}>{'Test Values'}</button>*/}
             </div>
         </div>
     );
