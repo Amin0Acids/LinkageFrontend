@@ -28,11 +28,12 @@ function TeacherPageUI(props) {
     }
 
     function fetchCreateSession() {
+        console.log(jwtTokenRef.current);
         fetch("http://10.0.0.74:8080/teacher/session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${jwtTokenRef.current}`
+                "Authorization": `Bearer ${jwtTokenRef.current}`
             },
             body: JSON.stringify({
                 slideLink: String(slideLink),
