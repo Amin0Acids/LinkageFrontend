@@ -1,13 +1,38 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom/client'
 import "./main.css"
 function StudentPageUI() {
-
+    const questionIDs = [];
     const [sessionID, setSessionID] = useState('');
 
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
+    }
+
+    function fetchQuestionInfo(slideNum, question) {
+        fetch("http://10.0.0.74:8080/user/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                slideNum: String(slideNum),
+                question: String(question),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const item = {id: data.id, slideNum: data.slideNum, question: data.question};
+                questionIDs.push(item);
+            })
+            .catch((error) => console.log(error));
+
+        console.log(
+            JSON.stringify({
+                slideNum: String(slideNum),
+                question: String(question),
+            })
+        );
     }
 
     return (
