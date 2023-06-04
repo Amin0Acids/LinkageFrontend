@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ReactDOM from 'react-dom/client'
 import "./main.css"
 
 const questionIDs = [];
-function StudentPageUI() {
+function StudentPageUI(props) {
     const [sessionID, setSessionID] = useState('');
     const [slideLink, setSlideLink] = useState('https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal');
     const [slideNum, setSlideNum] = useState('');
     const [question, setQuestion] = useState('');
+    const jwtTokenRef = useRef('');
+
+    useEffect(() => {
+        jwtTokenRef.current = props.jwtToken;
+    }, [props.jwtToken]);
 
     function testValues() {
         console.log(sessionID);
@@ -28,22 +33,8 @@ function StudentPageUI() {
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
     }
-    function fetchLogout() {
-        fetch("http://", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                //send them back to login page
-
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.isSuccessful = true;
-            })
-            .catch((error) => console.log(error));
+    function logout() {
+        props.page = "home"
     }
     function fetchSessionID(sessionID) {
         //use when submitting sessionID
@@ -51,6 +42,7 @@ function StudentPageUI() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + jwtTokenRef.current
             },
             body: JSON.stringify({
                 sessionID: String(sessionID),
@@ -69,6 +61,7 @@ function StudentPageUI() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + jwtTokenRef.current
             },
             body: JSON.stringify({
                 slideNum: String(slideNum),
@@ -115,7 +108,7 @@ function StudentPageUI() {
                         <input id={"searchbar"} className={"input"} type={"text"} name={"searchbar"} placeholder={"Session ID"} value={sessionID} onChange={changeSessionID} />
                     </div>
                     <div className={"tab"}>
-                        <button className={"tablinks"} value={"button1"}>{'Log Out'}</button>
+                        <button className={"tablinks"} value={"button1"} onClick={logout}>{'Log Out'}</button>
                         <button className={"tablinks"} value={"button2"} onClick={sendSessionID}>{'Join Session'}</button>
                     </div>
                 </div>
