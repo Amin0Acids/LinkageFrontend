@@ -1,0 +1,16 @@
+#usernamestudent {
+    float: right;
+    font-family: 'Qanelas Soft Semibold', serif;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    translate: 0 -100%;
+    margin: auto auto;
+    text-align: right;
+    display: block;
+    border: none;
+    background-color: white;
+    font-size: 200%;
+    padding: 0 10px;
+    text-decoration: underline;
+}
