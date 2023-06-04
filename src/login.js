@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import Conditionalrendering from "./conditionalrendering";
 
 let registerMode = false;
-function LoginUI() {
+function LoginUI(props) {
     const jwtTokenRef = useRef(null);
 
     const [currentPage, setCurrentPage] = useState('home');
@@ -73,13 +73,10 @@ function LoginUI() {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    //fix this later
-                    data.jwtToken = null;
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
                     resolve(true);
-                    changePage('studentpage')
 
                 })
                 .catch((error) => {
@@ -96,8 +93,24 @@ function LoginUI() {
             confirmPassword.setAttribute("type", "password");
             confirmPassword.setAttribute("name", "confirmPassword");
             confirmPassword.setAttribute("id", "confirmPassword");
-            confirmPassword.setAttribute("placeholder", "Confirm Password")
+            confirmPassword.setAttribute("placeholder", "Confirm Password");
             confirmPassword.setAttribute("class", "input");
+            const role = document.createElement("input");
+            role.setAttribute("list", "roles");
+            role.setAttribute("name", "role");
+            role.setAttribute("id", "role");
+            role.setAttribute("placeholder", "Role");
+            role.setAttribute("class", "input");
+            const roleList = document.createElement("datalist");
+            roleList.setAttribute("id", "roles");
+            const studentOption = document.createElement("option");
+            studentOption.setAttribute("value", "student");
+            const teacherOption = document.createElement("option");
+            teacherOption.setAttribute("value", "teacher");
+            roleList.appendChild(studentOption);
+            roleList.appendChild(teacherOption);
+            document.getElementById("container").insertBefore(role, document.getElementById("errorOutput"));
+            document.getElementById("container").insertBefore(roleList, document.getElementById("errorOutput"));
             document.getElementById("container").insertBefore(confirmPassword, document.getElementById("errorOutput"));
             document.getElementById("login").innerHTML = "Register";
             document.getElementById("register").innerHTML = "Already have an account? ";
@@ -140,7 +153,17 @@ function LoginUI() {
                 setErrorMessage('');
 
                 fetchUserLogin(username, password)
-                    .then(() => {console.log(jwtTokenRef.current); console.log("fish"); window.location.href = "./main"})
+                    .then(() => {
+                        console.log(jwtTokenRef.current);
+                        console.log("fish");
+                        if (role === "teacher"){
+                            changePage('teacher');
+                            props.page('teacher');
+                        } else {
+                            changePage('student');
+                            props.page('student');
+                        }
+                    })
                     .catch(() => {console.log(jwtTokenRef.current); alert("Your email or password may be incorrect.")});
             }
         }
@@ -151,27 +174,28 @@ function LoginUI() {
         console.log(username);
         console.log(password);
         console.log(role);
+        setCurrentPage('teacher');
+        props.page('teacher');
     }
 //conditional rendering
 
     return (
         <div id="container">
             <div id="logo">
-                <h1 style={{fontFamily: "Qanelas Soft SemiBold", fontSize: "400%"}}>jun 3</h1>
+                <h1 style={{fontFamily: "Qanelas Soft SemiBold", fontSize: "400%"}}>Linkage</h1>
             </div>
             <input id={"username"} className="input" type="text" name="username" placeholder="Username" value={username} onChange={changeUsername}></input>
             <input id={"password"} className="input" type="password" name="password" placeholder="Password" value={password} onChange={changePassword}></input>
-            <input id={"role"} className={"input"} list={"roles"} name="role" placeholder="Role" value={role} onChange={changeRole}/>
+            {/*<input id={"role"} className={"input"} list={"roles"} name="role" placeholder="Role" value={role} onChange={changeRole}/>
             <dataList id={"roles"}>
                 <option value={"Teacher"}></option>
                 <option value={"Student"}></option>
-            </dataList>
+            </dataList>*/}
             {/*check if is error message*/}
             {errorMessage && <p>{errorMessage}</p>}
             <button className={"button"} onClick={logvalues}>testing</button>
             <button id="login" className="button" onClick={validateLoginForm}>Login</button>
             <button id="register" className="button" onClick={switchMode}>Register</button>
-
         </div>
     );
 }

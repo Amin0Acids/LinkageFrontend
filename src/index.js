@@ -2,11 +2,6 @@ import React, {useRef, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import "./login.css"
-// import Conditionalrendering from "./conditionalrendering";
-import LoginUI from "./login";
-import ConditionalRendering from "./conditionalrendering";
-import StudentPageUI from "./studentpage";
-import TeacherPageUI from "./teacherpage";
 import Conditionalrendering from "./conditionalrendering";
 
 // const jwtToken = document.cookie
@@ -17,7 +12,7 @@ import Conditionalrendering from "./conditionalrendering";
 // console.log(<ConditionalRendering props={'home'}/>)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Conditionalrendering page={'home'} />
+    <Conditionalrendering page='home' />
 );
 
 // If you want to start measuring performance in your app, pass a function

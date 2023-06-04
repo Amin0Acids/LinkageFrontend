@@ -85,7 +85,7 @@ function TeacherPageUI() {
             </div>
 
         </div>
-        {/*{ doRender ? */}<ManageStudents doRender = {doRender} sendDoRender={getDoRender}/>{/* : null }*/}
+        <ManageStudents doRender = {doRender} sendDoRender={getDoRender}/>
     </div>;
 }
 
