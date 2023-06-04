@@ -75,13 +75,9 @@ function StudentPageUI() {
 
     function sendSessionID() {
         fetchSessionID(sessionID);
-        //change href to slideLink
-        window.location.href = slideLink;
     }
 
     function sendQuestion() {
-        const slideNum = 1;
-        const question = document.getElementById("noteArea").value;
         fetchQuestionInfo(slideNum, question);
     }
 
@@ -114,7 +110,7 @@ function StudentPageUI() {
 
                 </div>
                 <div className={"containerRight"}>
-                    <input id="noteArea" contentEditable placeholder="Enter notes here..." value={question} onChange={changeQuestion} />
+                    <textarea id="noteArea" contentEditable placeholder="Enter notes here..." value={question} onChange={changeQuestion} />
                 </div>
                 <input id={"slideNumText"} type={"text"} name={"slideNum"} placeholder={"Slide Number"} value={slideNum} onChange={changeSlideNum}/>
                 <button id="sendQuestion" className="noteButton" onClick={sendQuestion} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Question"}</button>
