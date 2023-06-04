@@ -4,7 +4,7 @@ import styles from "./teacherpage.module.css"
 import QuestionList from "./questionList";
 import ManageStudents from "./manageStudents";
 
-function TeacherPageUI() {
+function TeacherPageUI(props) {
 
     const questionIDs = [];
     const [sessionID, setSessionID] = useState('');
@@ -13,32 +13,17 @@ function TeacherPageUI() {
     const [doRender, setDoRender] = useState(false);
 
 
-    function fetchLogout() {
-        fetch("http://", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${jwtTokenRef.current}`
-            },
-            body: JSON.stringify({
-                //send them back to login page
-                //same as student logout
-                //do later
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.isSuccessful = true;
-            })
-            .catch((error) => console.log(error));
+
+    function logout() {
+        props.page("home");
     }
 
-    function createSession() {
+    function fetchCreateSession() {
         fetch("http://", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${jwtTokenRef.current}`
+                Authorization: `Bearer ${props.jwtToken}`
             },
             body: JSON.stringify({
                 slideLink: String(slideLink),
@@ -176,8 +161,8 @@ function TeacherPageUI() {
                     <textarea id={styles.searchbar} className="input" type="text" name="searchbar" placeholder="Slide URL" value={slideLink} onChange={changeSlideLink} />
                 </div>
                 <div className="tab">
-                    <button className="tablinks" value="button1">Log Out</button>
-                    <button className="tablinks" value="button2">Create Session</button>
+                    <button className="tablinks" value="button1" onClick={logout}>Log Out</button>
+                    <button className="tablinks" value="button2" onClick={fetchCreateSession}>Create Session</button>
                 </div>
             </div>
         </div>
