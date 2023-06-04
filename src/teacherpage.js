@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./main.css"
 import styles from "./teacherpage.module.css"
+import QuestionList from "./questionList";
 
 function TeacherPageUI() {
 
@@ -28,6 +29,14 @@ function TeacherPageUI() {
 
     function changeSlideLink(event) {
         setSlideLink(event.target.value);
+    }
+
+    function deleteSession() {
+        return undefined;
+    }
+
+    function manageStudents() {
+        return undefined;
     }
 
     return <div>
@@ -58,9 +67,15 @@ function TeacherPageUI() {
                 {/*"https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal"*/}
             </div>
             <div className={"containerRight"}>
-                <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
+                <div id="noteArea" style={{borderWidth: "1.5px", padding: "8px"}}>
+                    Questions: <br />
+                    <QuestionList />
+                </div>
             </div>
-            <button id="sendQuestion" className="questionButton" onClick="sendQuestion()" style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Note"}</button>
+            <div>
+                <button id="students" className="noteButton" onClick={manageStudents()} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>Manage Students</button>
+                <button id="deletesession" className="noteButton" onClick={deleteSession()} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>Remove Session</button>
+            </div>
         </div>
     </div>;
 }
