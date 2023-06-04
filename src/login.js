@@ -46,6 +46,7 @@ function LoginUI(props) {
             .then((response) => response.json())
             .then((data) => {
                 data.isSuccessful = true;
+                roleVal = data.role;
             })
             .catch((error) => console.log(error));
 
