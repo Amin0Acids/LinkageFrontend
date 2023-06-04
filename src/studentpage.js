@@ -28,6 +28,23 @@ function StudentPageUI() {
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
     }
+    function fetchLogout() {
+        fetch("http://", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                //send them back to login page
+
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+            .catch((error) => console.log(error));
+    }
     function fetchSessionID(sessionID) {
         //use when submitting sessionID
         fetch("http://10.0.0.74:8080/student/session", {
