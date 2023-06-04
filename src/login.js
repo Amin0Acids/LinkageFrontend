@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import Conditionalrendering from "./index";
+import Conditionalrendering from "./conditionalrendering";
 
 let registerMode = false;
 function LoginUI() {
@@ -14,6 +14,7 @@ function LoginUI() {
     const changePage = (newPage) => {
         setCurrentPage(newPage);
     }
+
     const changeUsername = (event) => {
         setUsername(event.target.value);
     }
@@ -79,6 +80,7 @@ function LoginUI() {
                     loginSuccess(token)
                     resolve(true);
                     changePage('studentpage')
+
                 })
                 .catch((error) => {
 
@@ -169,7 +171,7 @@ function LoginUI() {
             <button className={"button"} onClick={logvalues}>testing</button>
             <button id="login" className="button" onClick={validateLoginForm}>Login</button>
             <button id="register" className="button" onClick={switchMode}>Register</button>
-            <Conditionalrendering page={currentPage} />
+
         </div>
     );
 }
