@@ -4,9 +4,8 @@ import styles from "./teacherpage.module.css"
 import QuestionList from "./questionList";
 import ManageStudents from "./manageStudents";
 
+export const questionIDs = [];
 function TeacherPageUI(props) {
-
-    let questionIDs = [];
     const [sessionID, setSessionID] = useState('');
     const [slideLink, setSlideLink] = useState('');
     // const doRender = useRef(false);
@@ -131,7 +130,8 @@ function TeacherPageUI(props) {
                 let temp = [];
                 data.map((data) => {
                     const item = {id: data.id, slideNum: data.slideNum, question: data.question};
-                    temp.push(item);
+                    questionIDs.push(item);
+                    console.log(questionIDs)
                 });
                 questionIDs = temp;
             })
@@ -152,6 +152,8 @@ function TeacherPageUI(props) {
     let getDoRender = () => {
         setDoRender(false);
     };
+
+
 
     return <div>
         <title>GOOGLE SLIDES TITLE HERE</title>
@@ -184,6 +186,7 @@ function TeacherPageUI(props) {
                 <div id="noteArea" style={{borderWidth: "1.5px", padding: "8px"}}>
                     Questions: <br />
                     <QuestionList />
+
                 </div>
             </div>
             <div>
