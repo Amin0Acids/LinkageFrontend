@@ -58,9 +58,9 @@ function LoginUI(props) {
         );
     }
 
-    function fetchUserLogin(username, password) {
-        return new Promise((resolve, reject) => {
-            fetch("http://10.0.0.74:8080/user/login", {
+    async function fetchUserLogin(username, password) {
+        try {
+            const response = await fetch("http://10.0.0.74:8080/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,22 +70,17 @@ function LoginUI(props) {
                     password: String(password),
                 }),
             })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data.role);
-                    setRole(String(data.role));
-                    const token = data.jwtToken;
-                    document.cookie = `token=${token}; path=/`;
-                    loginSuccess(token)
-                    resolve(true);
 
-                })
-                .catch((error) => {
-
-                    console.log(error);
-                    reject(error);
-                });
-        });
+            const data = await response.json();
+            setRole(String(data.role));
+            const token = data.jwtToken;
+            document.cookie = `token=${token}; path=/`;
+            loginSuccess(token)
+            return true;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
     }
     const switchMode = (event) => {
         //onclick
