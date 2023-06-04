@@ -17,6 +17,10 @@ function QuestionList(props) {
         }, 60000);
     });
 
+    useEffect(() => {
+        getQuestionInfo();
+    }, [props.session]);
+
     let fetchRemoveQuestion = (event) => {
         fetch("http://10.0.0.74:8080/teacher/session/question/remove", {
             method: "DELETE",
