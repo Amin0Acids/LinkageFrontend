@@ -1,0 +1,23 @@
+#manage{
+    position: fixed;
+    /*margin: 50%;*/
+    color: black;
+    border: black solid 3px;
+    background-color: #eeeeee;
+    left: 37.5%;
+    top: 45%;
+    width: 25%;
+    height: 10%;
+}
+
+#addStudent{
+    float: left;
+}
+
+#deleteStudent{
+    float: right;
+}
+
+#student{
+    font-size: 150%;
+}
