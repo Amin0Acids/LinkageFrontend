@@ -76,7 +76,8 @@ function TeacherPageUI() {
             },
             body: JSON.stringify({
                 //transfer this over child to parent
-                username: String(username),
+                participantUsername: String(username),
+                sessionID: String(sessionID),
             }
             ),
         })
@@ -95,7 +96,8 @@ function TeacherPageUI() {
             },
             body: JSON.stringify({
                 //transfer this over child to parent
-                username: String(username),
+                participantUsername: String(username),
+                sessionID: String(sessionID)
             }),
         })
             .then((response) => response.json())
@@ -131,7 +133,9 @@ function TeacherPageUI() {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwtTokenRef.current}`
-            }
+            }, body: JSON.stringify({
+                sessionID: String(sessionID)
+            })
         })
             .then((response) => response.json())
             .then((data) => {
