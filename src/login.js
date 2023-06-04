@@ -140,7 +140,7 @@ function LoginUI(props) {
                 fetchUserLogin(username, password)
                     .then(() => {
                         console.log(jwtTokenRef.current);
-                        console.log("fish");
+                        console.log(roleVal);
                         if (roleVal === "Teacher"){
                             changePage('teacher');
                             props.page('teacher');
@@ -179,7 +179,7 @@ function LoginUI(props) {
                 </dataList> </> : null}
             {/*check if is error message*/}
             {errorMessage && <p>{errorMessage}</p>}
-            <button className={"button"} onClick={logvalues}>testing</button>
+            {/*<button className={"button"} onClick={logvalues}>testing</button>*/}
             <button id="login" className="button" onClick={validateLoginForm}>Login</button>
             <button id="register" className="button" onClick={switchMode}>Register</button>
         </div>
