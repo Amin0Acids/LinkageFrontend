@@ -22,6 +22,7 @@ function QuestionList(props) {
     }, [props.session]);
 
     let fetchRemoveQuestion = (event) => {
+        console.log(event.target.id);
         fetch("http://10.0.0.74:8080/teacher/session/question/remove", {
             method: "DELETE",
             headers: {

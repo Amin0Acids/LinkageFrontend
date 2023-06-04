@@ -58,11 +58,12 @@ function StudentPageUI(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + jwtTokenRef.current
+                "Authorization": `Bearer ${jwtTokenRef.current}`
             },
             body: JSON.stringify({
                 slideNum: String(slideNum),
                 question: String(question),
+                sessionID: String(sessionID),
             }),
         })
             .then((response) => response.json())
@@ -76,6 +77,8 @@ function StudentPageUI(props) {
             JSON.stringify({
                 slideNum: String(slideNum),
                 question: String(question),
+                sessionID: String(sessionID),
+                jwt: jwtTokenRef.current
             })
         );
     }

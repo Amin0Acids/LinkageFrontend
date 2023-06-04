@@ -55,7 +55,7 @@ function TeacherPageUI(props) {
                 Authorization: `Bearer ${jwtTokenRef.current}`
             },
             body: JSON.stringify({
-                sessionID: String(sessionID),
+                sessionID: String(sessionID)
             }),
         })
             .then((response) => response.json())
