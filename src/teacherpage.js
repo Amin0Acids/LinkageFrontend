@@ -12,7 +12,11 @@ function TeacherPageUI(props) {
     // const doRender = useRef(false);
     const [doRender, setDoRender] = useState(false);
 
+    const jwtTokenRef = useRef(props.jwtToken);
 
+    useEffect(() => {
+        jwtTokenRef.current = props.jwtToken;
+    }, [props.jwtToken]);
 
     function logout() {
         props.page("home");
@@ -23,7 +27,7 @@ function TeacherPageUI(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${props.jwtToken}`
+                Authorization: `Bearer ${jwtTokenRef.current}`
             },
             body: JSON.stringify({
                 slideLink: String(slideLink),
