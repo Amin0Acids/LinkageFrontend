@@ -42,7 +42,7 @@ function TeacherPageUI() {
                     <button className={"tablinks"} value={"button1"}>{'Button1'}</button>
                     <button className={"tablinks"} value={"button2"}>{'Button2'}</button>
                 </div>
-                <button id={"username"}>{"Hello, Guest"}</button>
+                <p id={"username"}>{"Hello, Guest"}</p>
             </div>
         </div>
         <div className={"container"}>

@@ -40,7 +40,7 @@ function StudentPageUI() {
             <title>GOOGLE SLIDES TITLE HERE</title>
             <div className={"headerContainer"}>
                 <div className={"containerLeft"}>
-                    <button id={"usernamestudent"}>{"Hello, Guest"}</button>
+                    <p id={"usernamestudent"}>{"Hello, Guest"}</p>
                     <div className={"logo"}>
                         <img src={""} style={{width: "13%", height: "auto"}} alt={'error loading pic'} />
                         <h1>Linkage</h1>
