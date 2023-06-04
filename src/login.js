@@ -4,7 +4,6 @@ import Conditionalrendering from "./conditionalrendering";
 let registerMode = false;
 function LoginUI(props) {
     const jwtTokenRef = useRef(null);
-
     const [currentPage, setCurrentPage] = useState('home');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
