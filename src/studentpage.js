@@ -7,7 +7,18 @@ function StudentPageUI() {
     const [sessionID, setSessionID] = useState('');
     const [slideLink, setSlideLink] = useState('https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal');
     const [slideNum, setSlideNum] = useState('');
+    const [question, setQuestion] = useState('');
 
+    function testValues() {
+        console.log(sessionID);
+        console.log(slideLink);
+        console.log(slideNum);
+        console.log(question);
+    }
+
+    const changeQuestion = (event) => {
+        setQuestion(event.target.value);
+    }
     const changeSlideNum = (event) => {
         setSlideNum(event.target.value);
     }
@@ -103,10 +114,11 @@ function StudentPageUI() {
 
                 </div>
                 <div className={"containerRight"}>
-                    <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
+                    <input id="noteArea" contentEditable placeholder="Enter notes here..." value={question} onChange={changeQuestion} />
                 </div>
-                <input type={"text"} name={"slideNum"} placeholder={"Slide Number"} value={slideNum} onChange={changeSlideNum}/>
+                <input id={"slideNumText"} type={"text"} name={"slideNum"} placeholder={"Slide Number"} value={slideNum} onChange={changeSlideNum}/>
                 <button id="sendQuestion" className="noteButton" onClick={sendQuestion} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Question"}</button>
+                <button onClick={testValues}>{'Test Values'}</button>
             </div>
         </div>
     );

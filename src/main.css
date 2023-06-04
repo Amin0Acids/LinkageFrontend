@@ -479,3 +479,18 @@ html, body {
     transition: 0.2s;
     border-radius: 10px;
 }
+
+#slideNumText{
+    margin-top: 0;
+    margin-left: 1%;
+    height: 60px;
+    float: left;
+    width: 10%;
+    font-size: 100%;
+    min-width: 10%;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    transition: 0.2s;
+    border-radius: 10px;
+}
