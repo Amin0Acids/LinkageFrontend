@@ -27,14 +27,11 @@ function StudentPageUI(props) {
     const changeSlideNum = (event) => {
         setSlideNum(event.target.value);
     }
-    const changeSlideLink = (event) => {
-        setSlideLink(event.target.value);
-    }
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
     }
     function logout() {
-        props.page = "home"
+        props.page("home");
     }
     function fetchSessionID(sessionID) {
         //use when submitting sessionID
@@ -50,7 +47,7 @@ function StudentPageUI(props) {
         })
             .then((response) => response.json())
             .then((data) => {
-                changeSlideLink(data.slide);
+                setSlideLink(data.slide);
             })
             .catch((error) => console.log(error));
         }
