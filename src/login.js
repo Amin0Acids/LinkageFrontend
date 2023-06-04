@@ -4,10 +4,11 @@ import Conditionalrendering from "./conditionalrendering";
 let registerMode = false;
 function LoginUI(props) {
     const jwtTokenRef = useRef(null);
+    const [registerModeVar, setRegisterMode] = useState(false);
     const [currentPage, setCurrentPage] = useState('home');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
+    const [roleVal, setRole] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const changePage = (newPage) => {
@@ -30,16 +31,16 @@ function LoginUI(props) {
         //whenever we need to access jwt token use kwtTokenRef
         jwtTokenRef.current = token;
     }
-    function fetchUserSignup(email, password, role) {
+    function fetchUserSignup(username, password, roleVal) {
         fetch("http://10.0.0.74:8080/user/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                email: String(email),
+                username: String(username),
                 password: String(password),
-                role: String(role),
+                role: String(roleVal),
             }),
         })
             .then((response) => response.json())
@@ -50,14 +51,14 @@ function LoginUI(props) {
 
         console.log(
             JSON.stringify({
-                email: String(email),
+                username: String(username),
                 password: String(password),
-                role: String(role),
+                role: String(roleVal),
             })
         );
     }
 
-    function fetchUserLogin(email, password) {
+    function fetchUserLogin(username, password) {
         return new Promise((resolve, reject) => {
             fetch("http://10.0.0.74:8080/user/login", {
                 method: "POST",
@@ -66,7 +67,7 @@ function LoginUI(props) {
                     Authorization: `Bearer ${jwtTokenRef.current}`
                 },
                 body: JSON.stringify({
-                    email: String(email),
+                    username: String(username),
                     password: String(password),
                 }),
             })
@@ -94,22 +95,6 @@ function LoginUI(props) {
             confirmPassword.setAttribute("id", "confirmPassword");
             confirmPassword.setAttribute("placeholder", "Confirm Password");
             confirmPassword.setAttribute("class", "input");
-            const role = document.createElement("input");
-            role.setAttribute("list", "roles");
-            role.setAttribute("name", "role");
-            role.setAttribute("id", "role");
-            role.setAttribute("placeholder", "Role");
-            role.setAttribute("class", "input");
-            const roleList = document.createElement("datalist");
-            roleList.setAttribute("id", "roles");
-            const studentOption = document.createElement("option");
-            studentOption.setAttribute("value", "student");
-            const teacherOption = document.createElement("option");
-            teacherOption.setAttribute("value", "teacher");
-            roleList.appendChild(studentOption);
-            roleList.appendChild(teacherOption);
-            document.getElementById("container").insertBefore(role, document.getElementById("errorOutput"));
-            document.getElementById("container").insertBefore(roleList, document.getElementById("errorOutput"));
             document.getElementById("container").insertBefore(confirmPassword, document.getElementById("errorOutput"));
             document.getElementById("login").innerHTML = "Register";
             document.getElementById("register").innerHTML = "Already have an account? ";
@@ -118,11 +103,13 @@ function LoginUI(props) {
             document.getElementById("register").appendChild(boldLogIn);
 
             registerMode = true;
+            setRegisterMode(true);
         } else {
             document.getElementById("login").innerHTML = "Login";
             document.getElementById("register").innerHTML = "Register";
             document.getElementById("confirmPassword").remove();
             registerMode = false;
+            setRegisterMode(false);
         }
     }
 
@@ -146,7 +133,7 @@ function LoginUI(props) {
             if(registerMode) {
                 setErrorMessage('');
 
-                fetchUserSignup(username, password, role);
+                fetchUserSignup(username, password, roleVal);
             } else {
                 console.log("logging in")
                 setErrorMessage('');
@@ -155,7 +142,7 @@ function LoginUI(props) {
                     .then(() => {
                         console.log(jwtTokenRef.current);
                         console.log("fish");
-                        if (role === "teacher"){
+                        if (roleVal === "teacher"){
                             changePage('teacher');
                             props.page('teacher');
                         } else {
@@ -172,9 +159,10 @@ function LoginUI(props) {
     function logvalues(){
         console.log(username);
         console.log(password);
-        console.log(role);
-        setCurrentPage('teacher');
-        props.page('teacher');
+        console.log(roleVal);
+        console.log(registerModeVar);
+        // setCurrentPage('teacher');
+        // props.page('teacher');
     }
 //conditional rendering
 
@@ -185,11 +173,11 @@ function LoginUI(props) {
             </div>
             <input id={"username"} className="input" type="text" name="username" placeholder="Username" value={username} onChange={changeUsername}></input>
             <input id={"password"} className="input" type="password" name="password" placeholder="Password" value={password} onChange={changePassword}></input>
-            {/*<input id={"role"} className={"input"} list={"roles"} name="role" placeholder="Role" value={role} onChange={changeRole}/>
-            <dataList id={"roles"}>
-                <option value={"Teacher"}></option>
-                <option value={"Student"}></option>
-            </dataList>*/}
+            {registerModeVar ? <> <input id={"role"} className={"input"} list={"roles"} name="role" placeholder="Role" value={roleVal} onChange={changeRole}/>
+                <dataList id={"roles"}>
+                    <option value={"Teacher"}></option>
+                    <option value={"Student"}></option>
+                </dataList> </> : null}
             {/*check if is error message*/}
             {errorMessage && <p>{errorMessage}</p>}
             <button className={"button"} onClick={logvalues}>testing</button>
