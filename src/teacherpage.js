@@ -12,6 +12,115 @@ function TeacherPageUI() {
     // const doRender = useRef(false);
     const [doRender, setDoRender] = useState(false);
 
+
+    function fetchLogout() {
+        fetch("http://", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                //send them back to login page
+                //same as student logout
+                //do later
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+            .catch((error) => console.log(error));
+    }
+
+    function createSession() {
+        fetch("http://", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                slideLink: String(slideLink),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+    }
+
+    function removeSession() {
+        fetch("http://", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                sessionID: String(sessionID),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+    }
+
+    function fetchAddStudent() {
+        fetch("http://", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                //transfer this over child to parent
+                username: String(username),
+            }
+            ),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+    }
+
+    function fetchRemoveStudent() {
+        fetch("http://", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                //transfer this over child to parent
+                username: String(username),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+    }
+
+    function fetchRemoveQuestion() {
+        fetch("http://", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
+            },
+            body: JSON.stringify({
+                //transfer this over child to parent
+                questionID: String(questionID),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                data.isSuccessful = true;
+            })
+    }
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
     }
@@ -21,6 +130,7 @@ function TeacherPageUI() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${jwtTokenRef.current}`
             }
         })
             .then((response) => response.json())
