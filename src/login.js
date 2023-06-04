@@ -72,7 +72,7 @@ function LoginUI(props) {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setRole(data.role);
+                    setRole(String(data.role));
                     const token = data.jwtToken;
                     document.cookie = `token=${token}; path=/`;
                     loginSuccess(token)
