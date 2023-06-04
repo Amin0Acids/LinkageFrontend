@@ -64,7 +64,6 @@ function LoginUI(props) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtTokenRef.current}`
                 },
                 body: JSON.stringify({
                     username: String(username),
