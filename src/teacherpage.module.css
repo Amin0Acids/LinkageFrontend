@@ -1,16 +1,30 @@
-#usernamestudent {
+#session {
     float: right;
     font-family: 'Qanelas Soft Semibold', serif;
     position: absolute;
     right: 0;
-    top: 100%;
+    top: 60%;
     translate: 0 -100%;
     margin: auto auto;
     text-align: right;
     display: block;
     border: none;
     background-color: white;
-    font-size: 200%;
+    font-size: 150%;
     padding: 0 10px;
-    text-decoration: underline;
+}
+
+#searchbar {
+    height: 80px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: left;
+    width: 60%;
+    min-width: 40%;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    transition: 0.2s;
+    border-radius: 10px;
 }
