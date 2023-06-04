@@ -41,12 +41,14 @@ function QuestionList(props) {
     }
 
     function getQuestionInfo() {
-        if (props.session !== ''){
+        console.log(props.session)
+        console.log(props.jwtToken)
+        if (props.session !== '' && props.session !== undefined) {
             fetch("http://10.0.0.74:8080/teacher/session/question", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtTokenRef.current}`
+                    "Authorization": `Bearer ${props.jwtToken}`
                 }, body: JSON.stringify({
                     sessionID: String(props.session)
                 })
@@ -54,7 +56,7 @@ function QuestionList(props) {
                 .then((response) => response.json())
                 .then((data) => {
                     let temp = [];
-                    data.map((data) => {
+                    data.questions.map((data) => {
                         const item = {id: data.id, slideNum: data.slideNum, question: data.question};
                         temp.push(item);
                         console.log(temp)

@@ -42,7 +42,8 @@ function TeacherPageUI(props) {
             .then((response) => response.json())
             .then((data) => {
                 data.isSuccessful = true;
-                setSessionID(data.sessionID);
+                setSessionID(data.id);
+                console.log(data.id);
             })
     }
 
