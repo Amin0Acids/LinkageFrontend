@@ -1,16 +1,43 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client'
 import "./main.css"
-function StudentPageUI() {
-    const questionIDs = [];
-    const [sessionID, setSessionID] = useState('');
 
+const questionIDs = [];
+function StudentPageUI() {
+    const [sessionID, setSessionID] = useState('');
+    const [slideLink, setSlideLink] = useState('https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal');
+    const [slideNum, setSlideNum] = useState('');
+
+    const changeSlideNum = (event) => {
+        setSlideNum(event.target.value);
+    }
+    const changeSlideLink = (event) => {
+        setSlideLink(event.target.value);
+    }
     const changeSessionID = (event) => {
         setSessionID(event.target.value);
     }
+    function fetchSessionID(sessionID) {
+        //use when submitting sessionID
+        fetch("http://10.0.0.74:8080/student/session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                sessionID: String(sessionID),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                changeSlideLink(data.slide);
+            })
+            .catch((error) => console.log(error));
+        }
 
     function fetchQuestionInfo(slideNum, question) {
-        fetch("http://10.0.0.74:8080/user/signup", {
+        //use when sending question
+        fetch("http://10.0.0.74:8080/student/question", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,6 +62,19 @@ function StudentPageUI() {
         );
     }
 
+    function sendSessionID() {
+        fetchSessionID(sessionID);
+        //change href to slideLink
+        window.location.href = slideLink;
+    }
+
+    function sendQuestion() {
+        const slideNum = 1;
+        const question = document.getElementById("noteArea").value;
+        fetchQuestionInfo(slideNum, question);
+    }
+
+
     return (
         <div>
             <title>GOOGLE SLIDES TITLE HERE</title>
@@ -52,20 +92,21 @@ function StudentPageUI() {
                     </div>
                     <div className={"tab"}>
                         <button className={"tablinks"} value={"button1"}>{'Log Out'}</button>
-                        <button className={"tablinks"} value={"button2"}>{'Join Session '}</button>
+                        <button className={"tablinks"} value={"button2"} onClick={sendSessionID}>{'Join Session'}</button>
                     </div>
                 </div>
             </div>
             <div className={"container"}>
                 {/*for player now*/}
                 <div className={"containerLeft"}>
-                    <iframe src="https://docs.google.com/presentation/d/1SWiU05Wi6WsFG5IvUu5j-OeD6fGsZxBOkLQpxhXfGow/embed?rm=minimal" style={{ width: '100%', height: '500px' }} frameBorder="0" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    <iframe src={slideLink} style={{ width: '100%', height: '500px' }} frameBorder="0" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
                 </div>
                 <div className={"containerRight"}>
                     <div id="noteArea" contentEditable placeholder="Enter notes here..."></div>
                 </div>
-                <button id="sendQuestion" className="noteButton" onClick="sendQuestion()" style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Note"}</button>
+                <input type={"text"} name={"slideNum"} placeholder={"Slide Number"} value={slideNum} onChange={changeSlideNum}/>
+                <button id="sendQuestion" className="noteButton" onClick={sendQuestion} style={{color: "white", fontFamily: 'Qanelas Soft SemiBold'}}>{"Send Question"}</button>
             </div>
         </div>
     );
